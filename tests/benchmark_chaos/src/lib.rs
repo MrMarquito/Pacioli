@@ -123,11 +123,13 @@ mod tests {
             .await
             .unwrap();
 
-        sqlx::query("UPDATE account_balances SET balance = balance + 9999.00 WHERE account_id = $1")
-            .bind(acc_a.id.0)
-            .execute(&mut *tx)
-            .await
-            .unwrap();
+        sqlx::query(
+            "UPDATE account_balances SET balance = balance + 9999.00 WHERE account_id = $1",
+        )
+        .bind(acc_a.id.0)
+        .execute(&mut *tx)
+        .await
+        .unwrap();
 
         // Injected chaos: Worker disconnects / rolls back without committing
         tx.rollback().await.unwrap();
