@@ -1,4 +1,4 @@
-# General-Purpose Double-Entry Accounting Engine
+# Pacioli: General-Purpose Double-Entry Accounting Engine
 
 A high-integrity double-entry financial ledger engine built in Rust and PostgreSQL. Designed for payment processors, fintech platforms, and marketplace backends requiring mathematical zero-loss guarantees, deadlock-free concurrency, and cryptographic tamper resistance.
 
