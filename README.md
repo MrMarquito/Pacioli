@@ -1,5 +1,10 @@
 # Pacioli: General-Purpose Double-Entry Accounting Engine
 
+[![CI Quality Gate](https://github.com/MrMarquito/Pacioli/actions/workflows/ci.yml/badge.svg)](https://github.com/MrMarquito/Pacioli/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Rust Version](https://img.shields.io/badge/rust-1.78%2B-orange.svg)](https://www.rust-lang.org)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791.svg)](https://www.postgresql.org)
+
 A high-integrity double-entry financial ledger engine built in Rust and PostgreSQL. Designed for payment processors, fintech platforms, and marketplace backends requiring mathematical zero-loss guarantees, deadlock-free concurrency, and cryptographic tamper resistance.
 
 ## Table of Contents
