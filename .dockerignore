@@ -1,0 +1,8 @@
+@"
+target/
+.git/
+.env
+.env.*
+*.pdb
+*.exe
+"@ | Set-Content -Encoding utf8 .dockerignore

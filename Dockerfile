@@ -1,11 +1,12 @@
-# Stage 1: Build binary
-FROM rust:1.80-alpine AS builder
+# Stage 1: Build binary using the latest stable Rust compiler
+FROM rust:alpine AS builder
 
 RUN apk add --no-cache musl-dev
 
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
 COPY crates ./crates
+COPY tests ./tests
 COPY migrations ./migrations
 
 # Compile production release binary
