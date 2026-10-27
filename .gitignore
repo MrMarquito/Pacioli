@@ -1,0 +1,29 @@
+# Rust build artifacts
+/target/
+**/*.rs.bk
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Windows & OS metadata
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.pdb
+*.d
+
+# macOS metadata
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace

@@ -1,0 +1,9 @@
+[package]
+name = "architecture_fitness"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cargo_metadata.workspace = true
+# Add whatever linting/architecture crates you are using, e.g.:
+# cargo-arch = "0.1" 

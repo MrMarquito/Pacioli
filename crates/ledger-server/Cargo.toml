@@ -1,0 +1,28 @@
+[package]
+name = "ledger-server"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+ledger-core = { path = "../ledger-core" }
+ledger-accounts = { path = "../ledger-accounts" }
+ledger-journal = { path = "../ledger-journal" }
+ledger-balances = { path = "../ledger-balances" }
+ledger-audit = { path = "../ledger-audit" }
+ledger-reconciliation = { path = "../ledger-reconciliation" }
+
+axum = { workspace = true }
+tower-http = { workspace = true }
+tokio = { workspace = true }
+sqlx = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+rust_decimal = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+dotenvy = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+tracing-opentelemetry = { workspace = true }
+opentelemetry = { workspace = true }
+opentelemetry_sdk = { workspace = true }

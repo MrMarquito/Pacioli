@@ -1,0 +1,67 @@
+name: CI Quality Gate & Architecture Verification
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+  DATABASE_URL: postgres://ledger_admin:ledger_secure_password_2026@localhost:5432/ledger_db
+
+jobs:
+  verify:
+    name: Lint, Test, & Architecture Check
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ledger_admin
+          POSTGRES_PASSWORD: ledger_secure_password_2026
+          POSTGRES_DB: ledger_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Check code formatting
+        run: cargo fmt --check
+
+      - name: Clippy static analysis
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: Architecture boundary fitness test
+        run: cargo test -p architecture_fitness
+
+      - name: Domain unit & property tests
+        run: cargo test -p ledger-core
+
+      - name: Database trigger & immutability tests
+        run: cargo test -p db_tests
+
+      - name: Engine concurrency & idempotency tests
+        run: cargo test -p engine_tests
+
+      - name: Verification & reconciliation tests
+        run: cargo test -p verification_tests
+
+      - name: Contention benchmarks & chaos injection tests
+        run: cargo test -p benchmark_chaos

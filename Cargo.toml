@@ -1,0 +1,67 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/ledger-core",
+    "crates/ledger-accounts",
+    "crates/ledger-journal",
+    "crates/ledger-balances",
+    "crates/ledger-idempotency",
+    "crates/ledger-outbox",
+    "crates/ledger-reconciliation",
+    "crates/ledger-audit",
+    "crates/ledger-server",
+    "tests/architecture_fitness",
+    "tests/db_tests",
+    "tests/engine_tests",
+    "tests/verification_tests",
+    "tests/benchmark_chaos",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Ledger Engine Contributors"]
+license = "Apache-2.0"
+
+[workspace.dependencies]
+# Financial & Numerical Primitives
+rust_decimal = { version = "1.36", features = ["serde", "maths"] }
+rust_decimal_macros = "1.36"
+uuid = { version = "1.10", features = ["v4", "v7", "serde"] }
+chrono = { version = "0.4", default-features = false, features = ["clock", "serde"] }
+
+# Serialization & Web Transport
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+axum = "0.7"
+tower-http = { version = "0.5", features = ["trace", "cors"] }
+
+# Async Runtime & Database (Pure Rust TLS for ARM64 Windows + Linux)
+tokio = { version = "1.40", features = ["full"] }
+sqlx = { version = "0.8", default-features = false, features = [
+    "runtime-tokio",
+    "tls-rustls",
+    "postgres",
+    "macros",
+    "uuid",
+    "chrono",
+    "rust_decimal",
+    "migrate",
+    "json"
+] }
+dotenvy = "0.15"
+
+# Tracing & OpenTelemetry Observability
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+tracing-opentelemetry = "0.25"
+opentelemetry = "0.24"
+opentelemetry_sdk = { version = "0.24", features = ["rt-tokio"] }
+
+# Cryptography & Errors
+thiserror = "1.0"
+sha2 = "0.10"
+
+# Architecture Fitness & Property Testing
+cargo_metadata = "0.18"
+proptest = "1.5"

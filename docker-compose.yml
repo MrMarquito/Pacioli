@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ledger-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ledger_admin
+      POSTGRES_PASSWORD: ledger_secure_password_2026
+      POSTGRES_DB: ledger_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ledger_admin -d ledger_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
